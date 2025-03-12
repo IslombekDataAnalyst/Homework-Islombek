@@ -77,13 +77,6 @@ VALUES
 FROM FruitCount
 GROUP BY Name;
 
-select name, 
-SUM(case Fruit when 'Mango' then 1 Else 0 end) as Mango,
-SUM(case Fruit when 'Apple' then 1 Else 0 end) as Apple,
-Sum(case Fruit when 'Lichi' then 1 Else 0 end) as Lichi,
-Sum(case Fruit when 'Orange' then 1 Else 0 end) as Orange
-from FruitCount
-group by Name
 	
 	--Task3
 
