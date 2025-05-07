@@ -1,3 +1,141 @@
+--String Functions
+
+--American Standard Code for Information Interchange --ASCII
+select ASCII('a')
+select ASCII('A')
+select ascii('hello') -- = ascii ('h')
+--Char
+select char(77) -- M javobi
+select char(99) -- c javobi
+
+--LEN   string uzunligin topib beradi
+SELECT LEN('Hello world')
+SELECT LEN('     Hello world')  --oldidan kesa hisobga oladi --Leading
+SELECT LEN('Hello world                  ')  --orqadan kelsa hisobga olmaydi  --Trailing
+
+select *, len(name) from boys
+select len(2452)              --4
+
+--Reverse --teskarisiga aylantirib beradi
+select reverse('Hello')
+
+select *, reverse(item) from Cart1
+--Space 
+select space(10)
+
+--LTRIM  sapcelarni delete qiladi faqat chap tarafdagini
+
+select ltrim('        hello world')
+
+--RTRIM  --o'ng tarafdagi spacelarni o'chiradi
+
+select rtrim('hello world                         ')
+
+RTRIM(LTRIM(COL_NAME)) --HAM CHAP HAM O'NG TARAFDAGI SPACELARNI O'CHIRADI
+
+--TRIM --BOTH SIDES
+SELECT TRIM ('    HELLO WORLD        ')
+
+
+
+-----LOWER, UPPER
+SELECT LOWER('HELLO WORLD')  --hello world  --kichkina harflar bilan yozadi
+select upper('hello world')  --HELLO WORLD  --KATTA HARFLAR BILAN YOZIB KETADI
+
+--LEFT (string, char_count)
+
+SELECT LEFT ('hello world', 2) --'he'
+
+--RIGHT (string, char_count)
+
+SELECT RIGHT ('HELLO WORLD', 8) --'LO WORLD'
+
+---Substring (string, start_pos, char_count)
+
+select substring('hello world',2,3) --'ell'
+select substring('+998900260994',5,2)  ---'90'
+
+---Concat
+
+select concat('hello', 'world')  --helloworld
+select concat ('hello', ' world') --hello world
+select concat ('hello', ',', 'world')  --hello,world
+
+select concat('hello', 'world')  --helloworld
+select 'hello' + 'world'
+
+select concat(1,1) --11
+
+select 'Sanjar' + null   --null
+select concat('Sanjar',null) --Sanjar
+
+--Concat_WS, concat with a delimiter(separator)
+
+select concat_ws(' ','Hello','world', 'This','is', 'SQL', 'Lesson') --Hello world This is SQL Lesson
+select concat_ws('|','Hello','world', 'This','is', 'SQL', 'Lesson') --Hello|world|This|is|SQL|Lesson
+
+--Replace (string, value, new_value)
+select replace ('Hello world','o','a')  --Hella warld
+select replace ('Hello world This is SQL Lesson','this','it') --Hello world it is SQL Lesson  --this ==>> it
+
+' Hello world This is SQL Lesson   '  --9 space
+select replace(' Hello world This is SQL Lesson   ',' ','')
+select len(' Hello world This is SQL Lesson   '+'a')-1 - len(replace(' Hello world This is SQL Lesson   ',' ',''))  --9
+
+--Stuff (string, start_pos, char_count, new_string)
+
+select stuff ('Hello world This is SQL Lesson',6,3,'bye') --'Hellobyerld This is SQL Lesson'
+
+select stuff ('Hello world This is SQL Lesson',7,5,'bye')  --'Hello bye This is SQL Lesson'
+
+-- CHARINDEX  (char_to_be)_searched, string, [start_posotion]) --BIZ SORAGAN NARSANI Qayerda ekanini topib beradi
+select charindex(' ','Hello world')
+
+select left('hello world',charindex(' ','Hello world')) --'hello '
+
+select left('hello world',charindex(' ','Hello world')-1) --'hello'
+
+select charindex ('o','Hello world')  --5
+select charindex ('o',reverse('Hello world'))  --4
+
+select charindex ('o','Hello world',6) --8
+
+--Patindex
+
+select patindex ('%[aeuio]%','hello world') --2
+
+select patindex ('%o%','hello world') --5
+select patindex ('%wor%','hello world') --7
+
+SELECT * 
+FROM [TSQL2012].[Sales].[Customers]
+WHERE 
+    ContactName LIKE '%a%a%' 
+	    OR ContactName NOT LIKE '_%n%';
+--yani agar katakda 2 ta nuqta bo'lsa 2 ta nuqtani orasidagi so'z chiqsin aks holda katakning o'zi
+
+create table two_p (ID int, word varchar(50))
+insert into two_p values (1,'hello.world.salom'),
+       (2,'maab.school.bootcamp'),
+       (3,'xorazm.xonqa.navoiy'),
+       (4,'sql.server'),
+       (5,'Uzbekistan')
+select *from two_p
+where word like '%.*.%'
+
+SELECT ID, 
+       CASE 
+           WHEN LEN(word) - LEN(REPLACE(word, '.', '')) = 2 
+           THEN PARSENAME(REPLACE(word, '.', ','), 2) 
+           ELSE word 
+       END AS result
+FROM two_p;
+
+
+
+
+
+
 --Homewrok12
 --task 1
 --1
